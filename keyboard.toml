@@ -21,6 +21,9 @@ keymap = [
         ["_", "_", "_", "_", "Space", "LT(1, Grave)", "LT(2, Delete)", "Space", "_", "_", "_", "_"], 
     ], 
 ]
+[split]
+# Connection type of split, "serial" or "ble"
+connection = "serial"
 
 [split.central] #这是主键盘（一般是左手）的设置
 rows = 6 #这是主键盘的行数
