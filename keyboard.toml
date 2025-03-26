@@ -5,7 +5,7 @@ product_name = "RMK Keyboard"
 vendor_id = 0x4c4b
 product_id = 0x4643
 manufacturer = "haobo"
-chip = "rp2040"
+chip = "nrf52840"
 
 [matrix]
 # Input and output pins are mandatory
@@ -15,23 +15,36 @@ output_pins = ["PIN_19", "PIN_20", "PIN_21"]
 # row2col = true
 
 [layout]
-rows = 4
-cols = 3
-layers = 2
+rows = 6
+cols = 12
+layers = 3
 keymap = [
-    [
-        ["A", "B", "C"],
-        ["Kc1", "Kc2", "Kc3"],
-        ["LCtrl", "MO(1)", "LShift"],
-        ["OSL(1)", "LT(2, Kc9)", "LM(1, LShift | LGui)"]
-    ],
-    [
-        ["_", "TT(1)", "TG(2)"],
-        ["_", "_", "_"],
-        ["_", "_", "_"],
-        ["_", "_", "_"]
-    ],
+     [ 
+        ["Escape", "Kc1", "Kc2", "Kc3", "Kc4", "Kc5", "Kc6", "Kc7", "Kc8", "Kc9", "Kc0", "Backspace"], 
+        ["Tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "Backslash"], 
+        ["CapsLock", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Semicolon", "Quote"], 
+        ["LShift", "Z", "X", "C", "V", "B", "N", "M", "Comma", "Dot", "Slash", "WM(Enter,RShift)"], 
+        ["_", "LCtrl", "LGui", "LAlt", "Enter", "MO(2)", "PageUp", "PageDown", "WM(Minus,RAlt)", "WM(Equal,RCtrl)", "MO(1)", "_"], 
+        ["_", "_", "_", "_", "Space", "LT(1, Grave)", "LT(2, Delete)", "Space", "_", "_", "_", "_"], 
+    ], 
 ]
+
+[split.central] #这是主键盘（一般是左手）的设置
+rows = 6 #这是主键盘的行数
+cols = 6 #这是主键盘的列数
+row_offset = 0 #这是需要跳过多少行，主键盘写0
+col_offset = 0 #这是需要跳过多少列，主键盘写0
+ble_addr = [0x18, 0xe2, 0x21, 0x80, 0xc0, 0xc7] #蓝牙相关的吧，我没改，不敢动
+input_pins = ["P0_22", "P0_24", "P1_00", "P0_11", "P1_04", "P1_06"] #这是每一行对应的IO，参考原理图
+output_pins = ["P0_09", "P0_10", "P1_11", "P1_13", "P1_15", "P0_02"] #这是每一列对应的IO，参考原理图
+[[split.peripheral]] #这是从键盘（一般是右手）的设置
+rows = 6 #这是从键盘的行数
+cols = 6 #这是从键盘的列数
+row_offset = 0 #这是需要跳过多少行，写0
+col_offset = 6 #这是需要跳过多少列，数值=主键盘的cols数值，我这个键盘是6，也就是从键盘的列是从第7列开始
+ble_addr = [0x7e, 0xfe, 0x73, 0x9e, 0x66, 0xe3] 
+input_pins = ["P0_22", "P0_24", "P1_00", "P0_11", "P1_04", "P1_06"] 
+output_pins = ["P0_09", "P0_10", "P1_11", "P1_13", "P1_15", "P0_02"]
 
 [light]
 # All light pins are high-active by default, uncomment if you want it to be low-active
