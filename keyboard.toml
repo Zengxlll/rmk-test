@@ -21,9 +21,12 @@ keymap = [
         ["_", "_", "_", "_", "Space", "LT(1, Grave)", "LT(2, Delete)", "Space", "_", "_", "_", "_"], 
     ], 
 ]
+[ble]
+enabled = true
+
 [split]
 # Connection type of split, "serial" or "ble"
-connection = "serial"
+connection = "ble"
 
 [split.central] #这是主键盘（一般是左手）的设置
 rows = 6 #这是主键盘的行数
@@ -31,14 +34,19 @@ cols = 6 #这是主键盘的列数
 row_offset = 0 #这是需要跳过多少行，主键盘写0
 col_offset = 0 #这是需要跳过多少列，主键盘写0
 ble_addr = [0x18, 0xe2, 0x21, 0x80, 0xc0, 0xc7] #蓝牙相关的吧，我没改，不敢动
+[split.central.matrix]
+matrix_type = "normal"
 input_pins = ["P0_22", "P0_24", "P1_00", "P0_11", "P1_04", "P1_06"] #这是每一行对应的IO，参考原理图
 output_pins = ["P0_09", "P0_10", "P1_11", "P1_13", "P1_15", "P0_02"] #这是每一列对应的IO，参考原理图
+
 [[split.peripheral]] #这是从键盘（一般是右手）的设置
 rows = 6 #这是从键盘的行数
 cols = 6 #这是从键盘的列数
 row_offset = 0 #这是需要跳过多少行，写0
 col_offset = 6 #这是需要跳过多少列，数值=主键盘的cols数值，我这个键盘是6，也就是从键盘的列是从第7列开始
 ble_addr = [0x7e, 0xfe, 0x73, 0x9e, 0x66, 0xe3] 
+[split.peripheral.matrix]
+matrix_type = "normal"
 input_pins = ["P0_22", "P0_24", "P1_00", "P0_11", "P1_04", "P1_06"] 
 output_pins = ["P0_09", "P0_10", "P1_11", "P1_13", "P1_15", "P0_02"]
 
